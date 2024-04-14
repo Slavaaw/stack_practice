@@ -1,56 +1,72 @@
 ﻿#include <iostream>
+#include <sstream>
 #include <stack>
 
 using namespace std;
 
+class Stack {
+private:
+    stack<string> stack;
+    string options[3] = { "ЗАСУНУТЬ СВОЙ МИЛЛИМЕТРОВЫЙ ХУЙ В ДЕВАУШКУ", "ВАААААЙ КАКОЙ ВКУСНЫЙ ШАВЕРМА", "ЗАЕБАШИТЬ 2 СТАКА ЦЫГАН" };
+    string str;
+    stringstream geek;
+    int change;
+    
 
+public:
+    void choose() {
+        cout << "ЧТО ТЫ ВЫБЕРЕШЬ, СУКА: 0 - ЗАСУНУТЬ СВОЙ МИЛЛИМЕТРОВЫЙ ХУЙ В ДЕВАУШКУ(ФУ БЛЯТЬ), 1 - ВАААААЙ КАКОЙ ВКУСНЫЙ ШАВЕРМА, 2 - ЗАЕБАШИТЬ 2 СТАКА ЦЫГАН, 3 - отменить последнее действие" << endl;
+        cin >> str;
+        geek << str;
+        geek >> change;
 
-void whatYouChange(int change, string* options, stack<string> stack) {
-    switch (change)
-    {
-    case 0:
-        stack.push(*options);
-        cout << "Вы выбрали " << options[change] << "надеюсь, ты больше не запустишь меня, мудак, минус 200000000 китай кредит и путевка в медный бык" << endl;
-        break;
-
-    case 1:
-        stack.push(*(options + 1));
-        cout << "Вы выбрали " << options[change] << ". Уже лучше, но всё же растрел твой анал и долг перед китай партией одна кошка жена" << endl;
-        break;
-    case 2:
-        stack.push(*(options + 2));
-        cout << "Ура! Вы выбрали " << options[change] << ". Вы получить кошка жена и анальный вибратор" << endl;
-        break;
-
-    case 3:
-        cout << "Вы отменили действие: " << stack.top() << endl;
-        stack.pop();   
-        break;
-
-    default:
-        break;
+        if (change <= 3) {}
+        else { cout << "ЕБЛАН, ЧТО ТЫ ВВЁЛ НАXУЙ, БЕЗРУКОЕ ЧМО, ОФФНИ МЕНЯ НАХУЙ (ТАК ЖЕ, КАК И СВОЮ МАТЬ), ТЫ ТАКОЙ УМАЛИШЁННЫЙ СЫН ПРОСТИТУТКИ" << endl; }
     }
-}
+
+    void whatYouChanged() {
+        switch (change)
+        {
+        case 0:
+            stack.push(*options);
+            cout << "\nВы выбрали " << options[change] << " надеюсь, ты больше не запустишь меня, мудак, минус 200000000 китай кредит и путевка в медный бык\n" << endl;
+            break;
+
+        case 1:
+            stack.push(*(options + 1));
+            cout << "\nВы выбрали " << options[change] << ". Уже лучше, но всё же, растрел твой анал и долг перед китай партией одна кошка жена\n" << endl;
+            break;
+        case 2:
+            stack.push(*(options + 2));
+            cout << "\nУра! Вы выбрали " << options[change] << ". Вы получить кошка жена и анальный вибратор\n" << endl;
+            break;
+
+        case 3:
+            if (stack.size() != 0) {
+                cout << "Вы отменили действие: " << stack.top() << endl;
+                stack.pop();
+                break;
+            }
+            else { cout << "\nЕБЛАН, ТЫ НИХУЯ НЕ СДЕЛАЛ, ЧТОБЫ ОТМЕНЯТЬ, ПРОСТО КОНЧЕННОЕ СОЗДАНИЕ, ВСЯ ТВОЯ ЖИЗНЬ - РЕКЛАМА ПРЕЗЕРВАТИВОВ\n" << endl; }
+            
+
+        default:
+            break;
+        }
+    }
+
+    void Loop() {
+        do {
+            choose();
+            whatYouChanged();
+        } while (change != 0);
+        
+    }
+};
 
 int main()
 {
     setlocale(LC_ALL, "RU");
-    stack<string> stack;
-    int change;
-    string options[] = { "ЗАСУНУТЬ СВОЙ МИЛЛИМЕТРОВЫЙ ХУЙ В ДЕВАУШКУ", "ВАААААЙ КАКОЙ ВКУСНЫЙ ШАВЕРМА", "ЗАЕБАШИТЬ 2 СТАКА ЦЫГАН"};
-    bool isLoop = true;
-    
-    do {
-        cout << "======================================================" << endl;
-        cout << "ЧТО ТЫ ВЫБЕРЕШЬ, СУКА?" << endl << "0 - ЗАСУНУТЬ СВОЙ МИЛЛИМЕТРОВЫЙ ХУЙ В ДЕВАУШКУ (ФУ БЛЯТЬ)(exit), 1 - ВАААААЙ КАКОЙ ВКУСНЫЙ ШАВЕРМА, 2 - ЗАЕБАШИТЬ 2 СТАКА ЦЫГАН (ВЫБОР ОЧЕВИДЕН) ИЛИ 3 - ОТМЕНА" << endl;
-        cout << "======================================================" << endl;
-        cin >> change;
-        
-        whatYouChange(change, options, stack);
-        cout << stack.size() << endl;
-
-    } while (isLoop);
-        
+    Stack stack;
+    stack.Loop();
 }
-
-
